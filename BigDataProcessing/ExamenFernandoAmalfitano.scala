@@ -79,6 +79,7 @@ object Examen {
              SUM(precio_unitario * cantidad) as total_ventas
       from ventas
       group by id_producto
+      order by id_producto
     """)
 
     resultado
