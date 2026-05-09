@@ -19,11 +19,11 @@ object Examen {
 
   import org.apache.spark.sql.functions._
   def ejercicio1(estudiantes: DataFrame)(implicit spark: SparkSession): DataFrame = {
-    val estudiantesDF: DataFrame = estudiantes.toDF("nombre", "edad", "nota")
-    val Schema = estudiantes.printSchema()
-    val AlumnosNotaMayorOcho = estudiantesDF.filter("nota > 8").orderBy(desc("nota"))
-    val NombreAlumnos = AlumnosNotaMayorOcho.select("nombre")
-    NombreAlumnos
+    val estudiantesDF: DataFrame = estudiantes.select("nombre", "edad", "nota")
+    val schema = estudiantes.printSchema()
+    val alumnosNotaMayorOcho = estudiantesDF.filter("nota > 8").orderBy(desc("nota"))
+    val nombreAlumnos = alumnosNotaMayorOcho.select("nombre")
+    nombreAlumnos
   }
 
   /** Ejercicio 2: UDF (User Defined Function)
@@ -32,10 +32,10 @@ object Examen {
    */
 
   def ejercicio2(numeros: DataFrame)(implicit spark: SparkSession): DataFrame = {
-    val ParOimparDF = udf((numero: Int) =>
+    val parOimparDF = udf((numero: Int) =>
       if (numero % 2 == 0) "Par" else "Impar")
-    val NewColum = numeros.withColumn("ParOimpar", ParOimparDF(col("numero")))
-    NewColum.select("ParOimpar")
+    val newColum = numeros.withColumn("ParOimpar", parOimparDF(col("numero")))
+    newColum.select("parOimparDF")
   }
 
   /** Ejercicio 3: Joins y agregaciones
@@ -46,13 +46,13 @@ object Examen {
    */
 
   def ejercicio3(estudiantes: DataFrame, calificaciones: DataFrame): DataFrame = {
-    val ResultadoJoin = estudiantes.join(calificaciones,
-      estudiantes("id") === calificaciones("id_estudiante"))
+    val resultadoJoin = estudiantes.join(calificaciones,
+        estudiantes("id") === calificaciones("id_estudiante"))
       .groupBy(estudiantes("id"), estudiantes("nombre"))
       .agg {
-        sum(calificaciones("calificacion")) / count(calificaciones("calificacion"))
+        avg("calificacion")
       }
-    ResultadoJoin
+    resultadoJoin
   }
 
   /** Ejercicio 4: Uso de RDDs
@@ -60,10 +60,10 @@ object Examen {
    */
 
   def ejercicio4(palabras: List[String])(implicit spark: SparkSession): RDD[(String, Int)] = {
-    val PalabrasRDD = spark.sparkContext.parallelize(palabras)
-    val OcurrenciasRDD = PalabrasRDD.map(palabra => (palabra, 1))
+    val palabrasRDD = spark.sparkContext.parallelize(palabras)
+    val ocurrenciasRDD = palabrasRDD.map(palabra => (palabra, 1))
       .reduceByKey(_ + _)
-    OcurrenciasRDD
+    ocurrenciasRDD
   }
 
   /**
