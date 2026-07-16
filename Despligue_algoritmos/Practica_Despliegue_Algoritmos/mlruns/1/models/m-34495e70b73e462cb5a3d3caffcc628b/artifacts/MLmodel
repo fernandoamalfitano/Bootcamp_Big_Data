@@ -1,0 +1,23 @@
+artifact_path: file:c:/Users/ferna/Desktop/Practica_Despliegue_Algoritmos/mlruns/1/models/m-34495e70b73e462cb5a3d3caffcc628b/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.9
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+    skops_trusted_types: null
+mlflow_version: 3.13.0
+model_id: m-34495e70b73e462cb5a3d3caffcc628b
+model_size_bytes: 30020
+model_uuid: m-34495e70b73e462cb5a3d3caffcc628b
+prompts: null
+run_id: 97c5445b2de74497a1bb78baaa4cdd0b
+utc_time_created: '2026-07-16 18:53:53.075460'
