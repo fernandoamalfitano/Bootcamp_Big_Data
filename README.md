@@ -43,5 +43,3 @@ Prácticas que realicé durante el bootcamp, desde los fundamentos de programaci
 **Fernando Amalfitano**
 [LinkedIn](https://www.linkedin.com/in/fernando-amalfitano-051751388/) · [Email](fernandoamalfitano@gmail.com)
 
-**Fernando Amalfitano**
-[LinkedIn](https://www.linkedin.com/in/fernando-amalfitano-051751388/) · [Email](mailto:fernandoamalfitano@gmail.com)
